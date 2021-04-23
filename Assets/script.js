@@ -1,3 +1,4 @@
+const apiKey = config.API_KEY;
 
 const searchForm = document.getElementById('searchField');
 let searchInput = document.getElementById('searchText');
