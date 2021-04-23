@@ -1,4 +1,3 @@
-const apiKey = 'db044841b99b5dea3d2c6a13780e9746';
 
 const searchForm = document.getElementById('searchField');
 let searchInput = document.getElementById('searchText');
