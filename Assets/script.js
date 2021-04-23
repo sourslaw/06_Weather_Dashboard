@@ -1,8 +1,12 @@
 const apiKey = config.API_KEY;
 
+// form 
 const searchForm = document.getElementById('searchField');
 let searchInput = document.getElementById('searchText');
+// li
+const mainF = document.getElementById('mainForecast');
 
+const secondF = document.getElementById('secondaryForecast');
 
 
 function getApi(requestUrl) {
@@ -20,6 +24,7 @@ function getApi(requestUrl) {
 			console.log(`weather city: ${data.city.name}`);
 
 			console.log(`date: ${data.list[0].dt_txt}`);
+
 			console.log(`temp: ${data.list[0].main.temp}`);
 			console.log(`feels like: ${data.list[0].main.feels_like}`);
 			console.log(`humidity: ${data.list[0].main.humidity}`);
@@ -31,11 +36,11 @@ function getApi(requestUrl) {
 			console.log(`weather description: ${data.list[0].weather[0].description}`);
 			console.log(`weather icon: ${data.list[0].weather[0].icon}`);
 
-
-
+			mainCard(data);
 		});
 };
 
+// form
 function handleForm(event) {
 	event.preventDefault();
 	console.log(`form submitted, search value: ${searchInput.value}`);
@@ -46,3 +51,36 @@ function handleForm(event) {
 };
 
 searchForm.addEventListener('submit', handleForm);
+
+function mainCard(data) {
+	
+	for (i = 0; i < (data.list).length; i +=8) {
+
+		const cardContainer = document.createElement('div');
+		cardContainer.className = 'card';
+		cardContainer.setAttribute('style', 'width: 15rem;');
+
+		
+		const cardBody = document.createElement('div');
+		cardBody.className = 'card-body';
+		const hFiver = document.createElement('h5');
+
+		const locDate = (`${data.list[i].dt_txt}`);
+		hFiver.innerText = locDate.slice(0,10);
+
+		const hSix = document.createElement('h6');
+		hSix.innerText = 'icon here'
+		const p = document.createElement('p');
+		p.innerText = Math.round(`${data.list[i].main.temp}`) + 'F';
+		cardBody.append(hFiver)
+		cardBody.append(hSix)
+		cardBody.append(p)
+	
+		cardContainer.append(cardBody)
+	
+		secondF.append(cardContainer);
+	}
+
+	// console.log(`IN THE FUNC weather city: ${data.city.name}`);
+
+};
