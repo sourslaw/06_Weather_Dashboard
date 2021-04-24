@@ -84,11 +84,14 @@ function forecastCards(data) {
 
 		const hSix = document.createElement('img');
 		hSix.setAttribute('src', icons[`${data[1].weather[0].icon}`]);
-		const p = document.createElement('p');
-		p.innerText = Math.round(`${data[0].list[i].main.temp}`) + 'F';
+		const pOne = document.createElement('p');
+		pOne.innerText = 'temperature: ' + Math.round(`${data[0].list[i].main.temp}`) + 'F';
+		const pTwo = document.createElement('p');
+		pTwo.innerText = `humidity: ${data[0].list[0].main.humidity}`;
 		cardBody.append(hFiver)
 		cardBody.append(hSix)
-		cardBody.append(p)
+		cardBody.append(pOne)
+		cardBody.append(pTwo)
 	
 		cardContainer.append(cardBody)
 	
@@ -122,8 +125,6 @@ function mainCard(data) {
 	// weather icons (https://openweathermap.org/weather-conditions)
 	const hSix = document.createElement('img');
 	hSix.setAttribute('src', icons[`${data[1].weather[0].icon}`]);
-	// hSix.innerText = `${data[1].weather[0].icon}`;
-	// hSix.innerText = icons[`${data[1].weather[0].icon}`];
 
 	const hSixTwo = document.createElement('h6');
 	hSixTwo.setAttribute('id', 'temperatureToday');
