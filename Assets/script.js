@@ -82,8 +82,8 @@ function forecastCards(data) {
 		const locDate = (`${data[0].list[i].dt_txt}`);
 		hFiver.innerText = locDate.slice(0,10);
 
-		const hSix = document.createElement('h6');
-		hSix.innerText = `${data[0].list[0].weather[0].icon}`;
+		const hSix = document.createElement('img');
+		hSix.setAttribute('src', icons[`${data[1].weather[0].icon}`]);
 		const p = document.createElement('p');
 		p.innerText = Math.round(`${data[0].list[i].main.temp}`) + 'F';
 		cardBody.append(hFiver)
@@ -119,9 +119,12 @@ function mainCard(data) {
 	// hFiver.innerText = locDate.slice(0,10);
 	hFiver.innerText = (todayIs());
 
-	const hSix = document.createElement('h6');
-	hSix.setAttribute('id', 'icon');
-	hSix.innerText = `${data[1].weather[0].icon}`;
+	// weather icons (https://openweathermap.org/weather-conditions)
+	const hSix = document.createElement('img');
+	hSix.setAttribute('src', icons[`${data[1].weather[0].icon}`]);
+	// hSix.innerText = `${data[1].weather[0].icon}`;
+	// hSix.innerText = icons[`${data[1].weather[0].icon}`];
+
 	const hSixTwo = document.createElement('h6');
 	hSixTwo.setAttribute('id', 'temperatureToday');
 	hSixTwo.innerText = 'temperature: ' + `${data[1].main.temp}`
@@ -144,13 +147,22 @@ function mainCard(data) {
 };
 
 const icons = {
-	01d: 'Assets/Images/01d.svg',
-	02d: 'Assets/Images/02d.svg',
-	03d: 'Assets/Images/03d.svg',
-	04d: 'Assets/Images/04d.svg',
-	09d: 'Assets/Images/09d.svg',
-	10d: 'Assets/Images/10d.svg',
-	11d: 'Assets/Images/11d.svg',
-	13d: 'Assets/Images/13d.svg',
-	50d: 'Assets/Images/50d.svg'
-}
+	'01d': 'Assets/Images/01d.svg',
+	'02d': 'Assets/Images/02d.svg',
+	'03d': 'Assets/Images/03d.svg',
+	'04d': 'Assets/Images/04d.svg',
+	'09d': 'Assets/Images/09d.svg',
+	'10d': 'Assets/Images/10d.svg',
+	'11d': 'Assets/Images/11d.svg',
+	'13d': 'Assets/Images/13d.svg',
+	'50d': 'Assets/Images/50d.svg',
+	'01n': 'Assets/Images/01d.svg',
+	'02n': 'Assets/Images/02d.svg',
+	'03n': 'Assets/Images/03d.svg',
+	'04n': 'Assets/Images/04d.svg',
+	'09n': 'Assets/Images/09d.svg',
+	'10n': 'Assets/Images/10d.svg',
+	'11n': 'Assets/Images/11d.svg',
+	'13n': 'Assets/Images/13d.svg',
+	'50n': 'Assets/Images/50d.svg'
+};
