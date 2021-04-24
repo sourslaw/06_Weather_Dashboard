@@ -9,37 +9,83 @@ const mainF = document.getElementById('mainForecast');
 const secondF = document.getElementById('secondaryForecast');
 
 
-function getApi(requestUrl) {
-	let headers = new Headers();
-	fetch(requestUrl)
-		.then(function (response) {
-			console.log(response);
-			return response.json();
-		})
-		.then(function (data) {
+// function getApi(requestUrl) {
+// 	let headers = new Headers();
+// 	fetch(requestUrl)
+// 		.then(function (response) {
+// 			console.log(response);
+// 			return response.json();
+// 		})
+// 		.then(function (data) {
+// 			console.log(data);
+
+// 			console.log(data.list[0].main);
+
+// 			console.log(`weather city: ${data.city.name}`);
+
+// 			console.log(`date: ${data.list[0].dt_txt}`);
+
+// 			console.log(`temp: ${data.list[0].main.temp}`);
+// 			console.log(`feels like: ${data.list[0].main.feels_like}`);
+// 			console.log(`humidity: ${data.list[0].main.humidity}`);
+
+// 			console.log(`wind speed: ${data.list[0].wind.speed}`);
+
+// 			console.log(`weather id: ${data.list[0].weather[0].id}`);
+// 			console.log(`weather main: ${data.list[0].weather[0].main}`);
+// 			console.log(`weather description: ${data.list[0].weather[0].description}`);
+// 			console.log(`weather icon: ${data.list[0].weather[0].icon}`);
+
+// 			mainCard(data);
+// 		});
+// };
+
+// testing P all
+function getApi(requestUrl, requestUrlDos) {
+	Promise.all([
+		fetch(requestUrl),
+		fetch(requestUrlDos)
+	]).then(function (responses) {
+			// console.log(responses);
+			return Promise.all(responses.map(function (response) {
+				return response.json();
+				console.log(response);
+			}));
+		}).then(function (data) {
 			console.log(data);
 
-			console.log(data.list[0].main);
+			console.log(`temperature: ${data[1].main.temp}`)
+			console.log(`temperature (feels like): ${data[1].main.feels_like}`)
+			console.log(`humidity: ${data[1].main.humidity}`)
 
-			console.log(`weather city: ${data.city.name}`);
 
-			console.log(`date: ${data.list[0].dt_txt}`);
+			console.log(`weather id: ${data[1].weather[0].id}`)
+			console.log(`weather main: ${data[1].weather[0].main}`)
+			console.log(`weather description: ${data[1].weather[0].description}`)
+			console.log(`weather icon: ${data[1].weather[0].icon}`)
 
-			console.log(`temp: ${data.list[0].main.temp}`);
-			console.log(`feels like: ${data.list[0].main.feels_like}`);
-			console.log(`humidity: ${data.list[0].main.humidity}`);
 
-			console.log(`wind speed: ${data.list[0].wind.speed}`);
+			// five day, three hour forcast map
+			// console.log(data[0].list[1].main);
+			// console.log(`weather city: ${data[0].city.name}`);
 
-			console.log(`weather id: ${data.list[0].weather[0].id}`);
-			console.log(`weather main: ${data.list[0].weather[0].main}`);
-			console.log(`weather description: ${data.list[0].weather[0].description}`);
-			console.log(`weather icon: ${data.list[0].weather[0].icon}`);
+			// console.log(`date: ${data[0].list[0].dt_txt}`);
+
+			// console.log(`temp: ${data[0].list[0].main.temp}`);
+			// console.log(`feels like: ${data[0].list[0].main.feels_like}`);
+			// console.log(`humidity: ${data[0].list[0].main.humidity}`);
+
+			// console.log(`wind speed: ${data[0].list[0].wind.speed}`);
+
+			// console.log(`weather id: ${data[0].list[0].weather[0].id}`);
+			// console.log(`weather main: ${data[0].list[0].weather[0].main}`);
+			// console.log(`weather description: ${data[0].list[0].weather[0].description}`);
+			// console.log(`weather icon: ${data[0].list[0].weather[0].icon}`);
 
 			mainCard(data);
+			forecastCards(data);
 		});
 };
-
 // form
 function handleForm(event) {
 	event.preventDefault();
@@ -47,14 +93,17 @@ function handleForm(event) {
 	// const requestUrl = `api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}`
 	const requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput.value}&units=imperial&appid=${apiKey}`;
 
-	getApi(requestUrl);
+	// testing  P all
+	const requestUrlDos = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}&units=imperial&appid=${apiKey}`;
+
+	getApi(requestUrl, requestUrlDos);
 };
 
 searchForm.addEventListener('submit', handleForm);
 
-function mainCard(data) {
+function forecastCards(data) {
 	
-	for (i = 0; i < (data.list).length; i +=8) {
+	for (i = 0; i < (data[0].list).length; i +=8) {
 
 		const cardContainer = document.createElement('div');
 		cardContainer.className = 'card';
@@ -65,13 +114,13 @@ function mainCard(data) {
 		cardBody.className = 'card-body';
 		const hFiver = document.createElement('h5');
 
-		const locDate = (`${data.list[i].dt_txt}`);
+		const locDate = (`${data[0].list[i].dt_txt}`);
 		hFiver.innerText = locDate.slice(0,10);
 
 		const hSix = document.createElement('h6');
 		hSix.innerText = 'icon here'
 		const p = document.createElement('p');
-		p.innerText = Math.round(`${data.list[i].main.temp}`) + 'F';
+		p.innerText = Math.round(`${data[0].list[i].main.temp}`) + 'F';
 		cardBody.append(hFiver)
 		cardBody.append(hSix)
 		cardBody.append(p)
@@ -82,5 +131,56 @@ function mainCard(data) {
 	}
 
 	// console.log(`IN THE FUNC weather city: ${data.city.name}`);
+};
 
+function todayIs() {
+	const d = new Date();
+	const weekday = ['sun', 'mon', 'tues', 'weds', 'thurs', 'fri', 'sat'];
+	let today = weekday[d.getDay()];
+	console.log(today)
+	return today;
+}
+
+function mainCard(data) {
+	
+	const cardContainer = document.createElement('div');
+	cardContainer.className = 'card';
+	cardContainer.setAttribute('style', 'width: 15rem;');
+
+	
+	const cardBody = document.createElement('div');
+	cardBody.className = 'card-body';
+	const hFiver = document.createElement('h5');
+
+	// const locDate = (`${data[0].list[i].dt_txt}`);
+	// hFiver.innerText = locDate.slice(0,10);
+	hFiver.innerText = (todayIs());
+
+	const hSix = document.createElement('h6');
+	hSix.setAttribute('id', 'icon');
+	hSix.innerText = 'icon here'
+	const hSixTwo = document.createElement('h6');
+	hSixTwo.setAttribute('id', 'temperatureToday');
+	hSixTwo.innerText = 'temperature: ' + `${data[1].main.temp}`
+
+	const pOne = document.createElement('p');
+	pOne.setAttribute('id', 'feelsLike');
+	pOne.innerText = 'feels like: ' + Math.round(`${data[1].main.feels_like}`) + 'F';
+	cardBody.append(hFiver)
+	cardBody.append(hSix)
+	cardBody.append(hSixTwo)
+	cardBody.append(pOne)
+	const pTwo= document.createElement('p');
+	pTwo.setAttribute('id', 'humidity');
+	pTwo.innerText = 'humidity: ' + `${data[1].main.humidity}` + '%';
+	cardBody.append(pTwo)
+
+
+
+	cardContainer.append(cardBody)
+
+	mainForecast.append(cardContainer);
+
+
+	// console.log(`IN THE FUNC weather city: ${data.city.name}`);
 };
