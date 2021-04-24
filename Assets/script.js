@@ -8,39 +8,7 @@ const mainF = document.getElementById('mainForecast');
 
 const secondF = document.getElementById('secondaryForecast');
 
-
-// function getApi(requestUrl) {
-// 	let headers = new Headers();
-// 	fetch(requestUrl)
-// 		.then(function (response) {
-// 			console.log(response);
-// 			return response.json();
-// 		})
-// 		.then(function (data) {
-// 			console.log(data);
-
-// 			console.log(data.list[0].main);
-
-// 			console.log(`weather city: ${data.city.name}`);
-
-// 			console.log(`date: ${data.list[0].dt_txt}`);
-
-// 			console.log(`temp: ${data.list[0].main.temp}`);
-// 			console.log(`feels like: ${data.list[0].main.feels_like}`);
-// 			console.log(`humidity: ${data.list[0].main.humidity}`);
-
-// 			console.log(`wind speed: ${data.list[0].wind.speed}`);
-
-// 			console.log(`weather id: ${data.list[0].weather[0].id}`);
-// 			console.log(`weather main: ${data.list[0].weather[0].main}`);
-// 			console.log(`weather description: ${data.list[0].weather[0].description}`);
-// 			console.log(`weather icon: ${data.list[0].weather[0].icon}`);
-
-// 			mainCard(data);
-// 		});
-// };
-
-// testing P all
+// P all (https://gomakethings.com/waiting-for-multiple-all-api-responses-to-complete-with-the-vanilla-js-promise.all-method/)
 function getApi(requestUrl, requestUrlDos) {
 	Promise.all([
 		fetch(requestUrl),
@@ -58,12 +26,10 @@ function getApi(requestUrl, requestUrlDos) {
 			console.log(`temperature (feels like): ${data[1].main.feels_like}`)
 			console.log(`humidity: ${data[1].main.humidity}`)
 
-
 			console.log(`weather id: ${data[1].weather[0].id}`)
 			console.log(`weather main: ${data[1].weather[0].main}`)
 			console.log(`weather description: ${data[1].weather[0].description}`)
 			console.log(`weather icon: ${data[1].weather[0].icon}`)
-
 
 			// five day, three hour forcast map
 			// console.log(data[0].list[1].main);
@@ -93,7 +59,6 @@ function handleForm(event) {
 	// const requestUrl = `api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}`
 	const requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput.value}&units=imperial&appid=${apiKey}`;
 
-	// testing  P all
 	const requestUrlDos = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}&units=imperial&appid=${apiKey}`;
 
 	getApi(requestUrl, requestUrlDos);
@@ -118,7 +83,7 @@ function forecastCards(data) {
 		hFiver.innerText = locDate.slice(0,10);
 
 		const hSix = document.createElement('h6');
-		hSix.innerText = 'icon here'
+		hSix.innerText = `${data[0].list[0].weather[0].icon}`;
 		const p = document.createElement('p');
 		p.innerText = Math.round(`${data[0].list[i].main.temp}`) + 'F';
 		cardBody.append(hFiver)
@@ -129,8 +94,6 @@ function forecastCards(data) {
 	
 		secondF.append(cardContainer);
 	}
-
-	// console.log(`IN THE FUNC weather city: ${data.city.name}`);
 };
 
 function todayIs() {
@@ -158,7 +121,7 @@ function mainCard(data) {
 
 	const hSix = document.createElement('h6');
 	hSix.setAttribute('id', 'icon');
-	hSix.innerText = 'icon here'
+	hSix.innerText = `${data[1].weather[0].icon}`;
 	const hSixTwo = document.createElement('h6');
 	hSixTwo.setAttribute('id', 'temperatureToday');
 	hSixTwo.innerText = 'temperature: ' + `${data[1].main.temp}`
@@ -175,12 +138,19 @@ function mainCard(data) {
 	pTwo.innerText = 'humidity: ' + `${data[1].main.humidity}` + '%';
 	cardBody.append(pTwo)
 
-
-
 	cardContainer.append(cardBody)
 
 	mainForecast.append(cardContainer);
-
-
-	// console.log(`IN THE FUNC weather city: ${data.city.name}`);
 };
+
+const icons = {
+	01d: 'Assets/Images/01d.svg',
+	02d: 'Assets/Images/02d.svg',
+	03d: 'Assets/Images/03d.svg',
+	04d: 'Assets/Images/04d.svg',
+	09d: 'Assets/Images/09d.svg',
+	10d: 'Assets/Images/10d.svg',
+	11d: 'Assets/Images/11d.svg',
+	13d: 'Assets/Images/13d.svg',
+	50d: 'Assets/Images/50d.svg'
+}
