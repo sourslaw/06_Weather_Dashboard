@@ -5,6 +5,8 @@ const ouvAccessToken =  config.O_UV_ACCESS_TOKEN;
 // form 
 const searchForm = document.getElementById('searchField');
 let searchInput = document.getElementById('searchText');
+const dropDown = document.getElementById('previousSearches');
+const selection = document.getElementById('searchSelection');
 // li
 const mainF = document.getElementById('mainForecast');
 
@@ -82,9 +84,32 @@ function handleForm(event) {
 	// const requestUrlCuatro = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely,hourly,daily,alerts&appid=${apiKey}`;
 	
 	getApi(requestUrl, requestUrlDos, requestUrlTres);
+
+	// save search to drop down menu
+	const pastSearch = document.createElement('option');
+	pastSearch.setAttribute('value', `${searchInput.value}`);
+	pastSearch.innerText = `${searchInput.value}`;
+
+	selection.append(pastSearch);
+
 };
 
+// dropdown
+function handleOtherForm(event) {
+	event.preventDefault();
+	console.log(`OTHER form submitted, search value: ${searchInput.value}`);
+	const requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${selection.value}&units=imperial&appid=${apiKey}`;
+	const requestUrlDos = `https://api.openweathermap.org/data/2.5/weather?q=${selection.value}&units=imperial&appid=${apiKey}`
+	const requestUrlTres = `http://api.positionstack.com/v1/forward?access_key=${psApiKey}&country=us&query=${selection.value}`;
+	getApi(requestUrl, requestUrlDos, requestUrlTres);
+};
+
+// search field
 searchForm.addEventListener('submit', handleForm);
+// dropdown
+selection.addEventListener('change', handleOtherForm);
+
+
 
 function forecastCards(data) {
 	
