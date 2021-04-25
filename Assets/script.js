@@ -40,7 +40,7 @@ function getApi(requestUrl, requestUrlDos, requestUrlTres) {
 
 			// five day, three hour forcast map
 			// console.log(data[0].list[1].main);
-			// console.log(`weather city: ${data[0].city.name}`);
+			console.log(`weather city: ${data[0].city.name}`);
 
 			// console.log(`date: ${data[0].list[0].dt_txt}`);
 
@@ -92,7 +92,7 @@ function forecastCards(data) {
 
 		const cardContainer = document.createElement('div');
 		cardContainer.className = 'card';
-		cardContainer.setAttribute('style', 'width: 12rem;');
+		cardContainer.setAttribute('style', 'width: 20%;');
 		
 		const cardBody = document.createElement('div');
 		cardBody.className = 'card-body';
@@ -135,6 +135,8 @@ function mainCard(data) {
 	
 	const cardBody = document.createElement('div');
 	cardBody.className = 'card-body';
+	const hFourer = document.createElement('h4');
+	hFourer.innerText = `${data[0].city.name}`;
 	const hFiver = document.createElement('h5');
 
 	// const locDate = (`${data[0].list[i].dt_txt}`);
@@ -152,6 +154,7 @@ function mainCard(data) {
 	const pOne = document.createElement('p');
 	pOne.setAttribute('id', 'feelsLike');
 	pOne.innerText = 'feels like: ' + Math.round(`${data[1].main.feels_like}`) + 'F';
+	cardBody.append(hFourer)
 	cardBody.append(hFiver)
 	cardBody.append(hSix)
 	cardBody.append(hSixTwo)
