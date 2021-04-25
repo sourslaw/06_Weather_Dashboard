@@ -22,26 +22,34 @@
 
 <body>
 	<div class="container">
+
 		<div class="row">
-			<form id="searchField">
-				<div class="input-group mb-3">
-					<input type="text" class="form-control" placeholder="serch" id="searchText">
-					<button class="btn btn-outline-secondary">search</button>
+			<div class="col-lg-3">
+				<div class="row">
+					<form id="searchField">
+						<div class="input-group mb-3">
+							<input type="text" class="form-control" placeholder="serch" id="searchText">
+							<button class="btn btn-outline-secondary">search</button>
+						</div>
+					</form>
 				</div>
-			</form>
+			</div>
+
+			<div class="col-lg-9">
+				<div class="row" id="mainForecast">
+					<!-- current day forecast -->
+				</div>
+				<div class="row" id="secondaryForecast">
+					<p> five days forecast</p>
+					<ul class="list-group list-group-horizontal" id="forecast">
+
+					</ul>
+				</div>
+			</div>
+
 		</div>
 
-		<div class="row" id="mainForecast">
-			<!-- current day forecast -->
 
-		</div>
-
-		<div class="row" id="secondaryForecast">
-			<p> five days forecast</p>
-			<ul class="list-group list-group-horizontal" id="forecast">
-
-			</ul>
-		</div>
 
 	</div>
 

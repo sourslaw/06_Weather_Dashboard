@@ -1,4 +1,6 @@
 const apiKey = config.API_KEY;
+const psApiKey =  config.PS_API_KEY;
+const ouvAccessToken =  config.O_UV_ACCESS_TOKEN;
 
 // form 
 const searchForm = document.getElementById('searchField');
@@ -9,10 +11,13 @@ const mainF = document.getElementById('mainForecast');
 const secondF = document.getElementById('secondaryForecast');
 
 // P all (https://gomakethings.com/waiting-for-multiple-all-api-responses-to-complete-with-the-vanilla-js-promise.all-method/)
-function getApi(requestUrl, requestUrlDos) {
+function getApi(requestUrl, requestUrlDos, requestUrlTres) {
 	Promise.all([
 		fetch(requestUrl),
-		fetch(requestUrlDos)
+		fetch(requestUrlDos),
+		fetch(requestUrlTres)
+
+		// fetch(requestUrlCuatro)
 	]).then(function (responses) {
 			// console.log(responses);
 			return Promise.all(responses.map(function (response) {
@@ -22,14 +27,16 @@ function getApi(requestUrl, requestUrlDos) {
 		}).then(function (data) {
 			console.log(data);
 
-			console.log(`temperature: ${data[1].main.temp}`)
-			console.log(`temperature (feels like): ${data[1].main.feels_like}`)
-			console.log(`humidity: ${data[1].main.humidity}`)
+			// console.log(`temperature: ${data[1].main.temp}`)
+			// console.log(`temperature (feels like): ${data[1].main.feels_like}`)
+			// console.log(`humidity: ${data[1].main.humidity}`)
+			console.log(`windspeed: ${data[1].wind.speed}`)
 
-			console.log(`weather id: ${data[1].weather[0].id}`)
-			console.log(`weather main: ${data[1].weather[0].main}`)
-			console.log(`weather description: ${data[1].weather[0].description}`)
-			console.log(`weather icon: ${data[1].weather[0].icon}`)
+			// console.log(`weather id: ${data[1].weather[0].id}`)
+			// console.log(`weather main: ${data[1].weather[0].main}`)
+			// console.log(`weather description: ${data[1].weather[0].description}`)
+			// console.log(`weather icon: ${data[1].weather[0].icon}`)
+
 
 			// five day, three hour forcast map
 			// console.log(data[0].list[1].main);
@@ -48,6 +55,14 @@ function getApi(requestUrl, requestUrlDos) {
 			// console.log(`weather description: ${data[0].list[0].weather[0].description}`);
 			// console.log(`weather icon: ${data[0].list[0].weather[0].icon}`);
 
+			// lat and lon stuff
+			// console.log(`city: ${data[2].data[0].name}`)
+			// console.log(`latitude: ${data[2].data[0].latitude}`)
+			// console.log(`longitude: ${data[2].data[0].longitude}`)
+
+			// const lat = `${data[2].data[0].latitude}`;
+			// const long = `${data[2].data[0].longitude}`;
+
 			mainCard(data);
 			forecastCards(data);
 		});
@@ -57,11 +72,16 @@ function handleForm(event) {
 	event.preventDefault();
 	console.log(`form submitted, search value: ${searchInput.value}`);
 	// const requestUrl = `api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}`
+
 	const requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput.value}&units=imperial&appid=${apiKey}`;
 
 	const requestUrlDos = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}&units=imperial&appid=${apiKey}`;
 
-	getApi(requestUrl, requestUrlDos);
+	const requestUrlTres = `http://api.positionstack.com/v1/forward?access_key=${psApiKey}&country=us&query=${searchInput.value}`;
+	
+	// const requestUrlCuatro = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely,hourly,daily,alerts&appid=${apiKey}`;
+	
+	getApi(requestUrl, requestUrlDos, requestUrlTres);
 };
 
 searchForm.addEventListener('submit', handleForm);
@@ -72,8 +92,7 @@ function forecastCards(data) {
 
 		const cardContainer = document.createElement('div');
 		cardContainer.className = 'card';
-		cardContainer.setAttribute('style', 'width: 15rem;');
-
+		cardContainer.setAttribute('style', 'width: 12rem;');
 		
 		const cardBody = document.createElement('div');
 		cardBody.className = 'card-body';
@@ -103,7 +122,7 @@ function todayIs() {
 	const d = new Date();
 	const weekday = ['sun', 'mon', 'tues', 'weds', 'thurs', 'fri', 'sat'];
 	let today = weekday[d.getDay()];
-	console.log(today)
+	// console.log(today)
 	return today;
 }
 
@@ -111,7 +130,7 @@ function mainCard(data) {
 	
 	const cardContainer = document.createElement('div');
 	cardContainer.className = 'card';
-	cardContainer.setAttribute('style', 'width: 15rem;');
+	cardContainer.setAttribute('style', 'width: 25rem;');
 
 	
 	const cardBody = document.createElement('div');
@@ -137,10 +156,14 @@ function mainCard(data) {
 	cardBody.append(hSix)
 	cardBody.append(hSixTwo)
 	cardBody.append(pOne)
-	const pTwo= document.createElement('p');
+	const pTwo = document.createElement('p');
 	pTwo.setAttribute('id', 'humidity');
 	pTwo.innerText = 'humidity: ' + `${data[1].main.humidity}` + '%';
 	cardBody.append(pTwo)
+	const pThree = document.createElement('p');
+	pThree.setAttribute('id', 'windSpeed');
+	pThree.innerText = 'windspeed: ' + `${data[1].wind.speed}` + 'mph';
+	cardBody.append(pThree)
 
 	cardContainer.append(cardBody)
 
