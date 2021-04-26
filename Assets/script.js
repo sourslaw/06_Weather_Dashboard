@@ -18,7 +18,6 @@ function getApi(requestUrl, requestUrlDos, requestUrlTres) {
 		fetch(requestUrl),
 		fetch(requestUrlDos),
 		fetch(requestUrlTres)
-
 		// fetch(requestUrlCuatro)
 	]).then(function (responses) {
 			// console.log(responses);
@@ -64,10 +63,29 @@ function getApi(requestUrl, requestUrlDos, requestUrlTres) {
 
 			// const lat = `${data[2].data[0].latitude}`;
 			// const long = `${data[2].data[0].longitude}`;
+			console.log(data[2].data[0].latitude);
+			console.log(data[2].data[0].longitude);
+
+			const lat = `${data[2].data[0].latitude}`
+			const long = `${data[2].data[0].longitude}`
 
 			mainCard(data);
 			forecastCards(data);
+
+			return fetch (`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely,hourly,daily,alerts&appid=${apiKey}`);
+		
+		}).then(function(response) {
+			return response.json();
+
+		}).then(function(newData) {
+			console.log(newData)
+			console.log(`uvi index: ${newData.current.uvi}`)
+
+			addMain(newData);
 		});
+
+			
+		// });
 };
 // form
 function handleForm(event) {
@@ -109,6 +127,10 @@ searchForm.addEventListener('submit', handleForm);
 // dropdown
 selection.addEventListener('change', handleOtherForm);
 
+// faker maincard
+function addMain(newData){
+	console.log("im outside the big call")
+} 
 
 
 function forecastCards(data) {
