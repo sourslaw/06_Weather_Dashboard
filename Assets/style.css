@@ -1,14 +1,18 @@
-img {
-	margin-top: 10px;
-	margin-bottom: 31px;
-}
-
 .container {
-	margin-top: 50px;
+	margin-top: 2.5rem;
 }
 
 h6 {
-	margin-bottom: 18px;
+	margin-bottom: .5rem;
+}
+
+img {
+	margin-top: .75rem;
+	margin-bottom: 1rem;
+}
+
+p {
+	margin: .2em;
 }
 
 #searchSelection {
@@ -24,6 +28,7 @@ h6 {
 	margin-bottom: .5rem;
 }
 
+/* for uv highlighting */
 #uv12 {
 	background-color: #81b29a;
 	color: white;

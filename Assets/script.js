@@ -146,9 +146,9 @@ function forecastCards(data) {
 		const hSix = document.createElement('img');
 		hSix.setAttribute('src', icons[`${data[1].weather[0].icon}`]);
 		const pOne = document.createElement('p');
-		pOne.innerText = 'temperature: ' + Math.round(`${data[0].list[i].main.temp}`) + 'F';
+		pOne.innerText = 'TEM: ' + Math.round(`${data[0].list[i].main.temp}`) + 'F';
 		const pTwo = document.createElement('p');
-		pTwo.innerText = `humidity: ${data[0].list[0].main.humidity}`;
+		pTwo.innerText = `Hm: ${data[0].list[0].main.humidity}` + '%';
 		cardBody.append(hFiver)
 		cardBody.append(hSix)
 		cardBody.append(pOne)
