@@ -117,6 +117,17 @@ function addMain(newData){
 	// pFour.setAttribute('id', 'uvIndex');
 	// cardBody.append(pFour);
 	pFour.innerText = `uvi index: ${newData.current.uvi}`;
+	if ( parseInt(`${newData.current.uvi}`) <= 2 ) {
+		pFour.setAttribute('id', 'uv12')
+	} else if ( parseInt(`${newData.current.uvi}`) >= 3  &&  parseInt(`${newData.current.uvi}`) <= 5 ) {
+		pFour.setAttribute('id', 'uv35')
+	} else if ( parseInt(`${newData.current.uvi}`) >= 6 && parseInt(`${newData.current.uvi}`) <= 7 ) {
+		pFour.setAttribute('id', 'uv67') 
+	} else if ( parseInt(`${newData.current.uvi}`) >= 8 && parseInt(`${newData.current.uvi}`) <= 10 ) {
+		pFour.setAttribute('id', 'uv810')
+	} else {
+		pFour.setAttribute('id', 'uv11')
+	};
 
 }; 
 
