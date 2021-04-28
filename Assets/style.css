@@ -1,14 +1,22 @@
 img {
-	margin-bottom: 15px;
+	margin-bottom: 31px;
 }
 
 .container {
 	margin-top: 50px;
 }
 
+h6 {
+	margin-bottom: 18px;
+}
+
 /* #mainForecast {
 	height: 5rems;
 } */
+#forecastSection {
+	margin-top: 1.5rem;
+	margin-bottom: .5rem;
+}
 
 #uv12 {
 	background-color: #81b29a;

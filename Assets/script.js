@@ -1,3 +1,4 @@
+// keys
 const apiKey = config.API_KEY;
 const psApiKey =  config.PS_API_KEY;
 const ouvAccessToken =  config.O_UV_ACCESS_TOKEN;
@@ -7,10 +8,11 @@ const searchForm = document.getElementById('searchField');
 let searchInput = document.getElementById('searchText');
 const dropDown = document.getElementById('previousSearches');
 const selection = document.getElementById('searchSelection');
-// li
+// mainForecast card
 const mainF = document.getElementById('mainForecast');
-
+// five day forecast LIs
 const secondF = document.getElementById('secondaryForecast');
+
 
 // promise all (https://gomakethings.com/waiting-for-multiple-all-api-responses-to-complete-with-the-vanilla-js-promise.all-method/)
 function getApi(requestUrl, requestUrlDos, requestUrlTres) {
@@ -22,14 +24,9 @@ function getApi(requestUrl, requestUrlDos, requestUrlTres) {
 			// console.log(responses);
 			return Promise.all(responses.map(function (response) {
 				return response.json();
-				// console.log(response);
 			}));
 		}).then(function (data) {
-			// console.log(data);
-			// console.log(`windspeed: ${data[1].wind.speed}`)
-			// console.log(`weather city: ${data[0].city.name}`);
-			// console.log(data[2].data[0].latitude);
-			// console.log(data[2].data[0].longitude);
+
 			const lat = `${data[2].data[0].latitude}`
 			const long = `${data[2].data[0].longitude}`
 
@@ -68,18 +65,10 @@ function handleForm(event) {
 
 	selection.append(pastSearch);
 
-	// remove child node on new search
-	const byeMain = document.getElementById('mainForecast');
-	while (byeMain.firstChild) {
-		byeMain.removeChild(byeMain.firstChild);
-	  }
-	const byeForecast = document.getElementById('secondaryForecast');
-	while (byeForecast.firstChild) {
-		byeForecast.removeChild(byeForecast.firstChild);
-	  }
+	clear()
 };
 
-// dropdown form handler (maybe combine with main form via input.value)
+// dropdown form handler (maybe refactor and combine with main form via shared input.value)
 function handleOtherForm(event) {
 	event.preventDefault();
 
@@ -91,31 +80,30 @@ function handleOtherForm(event) {
 	
 	getApi(requestUrl, requestUrlDos, requestUrlTres);
 
-	// remove child node on new search TWO (make this a function?)
+	clear()
+};
+
+// removes child nodes upon new search
+function clear() {
 	const byeMain = document.getElementById('mainForecast');
 	while (byeMain.firstChild) {
 		byeMain.removeChild(byeMain.firstChild);
-		}
+		};
 	const byeForecast = document.getElementById('secondaryForecast');
 	while (byeForecast.firstChild) {
 		byeForecast.removeChild(byeForecast.firstChild);
-		}
+		};
 };
 
 // search field
 searchForm.addEventListener('submit', handleForm);
 // dropdown
 selection.addEventListener('change', handleOtherForm);
-
-// faker maincard
+// faker mainCard (needs to be a global for now . . . refactor at later date)
 const pFour = document.createElement('p');
 
 function addMain(newData){
 
-	console.log("im outside the big call")
-	// const pFour = document.createElement('p');
-	// pFour.setAttribute('id', 'uvIndex');
-	// cardBody.append(pFour);
 	pFour.innerText = `uvi index: ${newData.current.uvi}`;
 	if ( parseInt(`${newData.current.uvi}`) <= 2 ) {
 		pFour.setAttribute('id', 'uv12')
@@ -211,8 +199,7 @@ function mainCard(data) {
 	pThree.setAttribute('id', 'windSpeed');
 	pThree.innerText = 'windspeed: ' + `${data[1].wind.speed}` + 'mph';
 	cardBody.append(pThree)
-	// const pFour = document.createElement('p');
-	pFour.setAttribute('id', 'uvIndex');
+	// pFour gets appened here, creation happens as global 
 	cardBody.append(pFour);
 
 	cardContainer.append(cardBody)
