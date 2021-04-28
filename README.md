@@ -30,6 +30,7 @@
 ### Credits
 - [Bootstrap](https://getbootstrap.com/)
 - [OpenWeather API](https://openweathermap.org/api)
+- [positionstack API](https://positionstack.com/documentation)
 
 ### License
 - Licensed under the [MIT](https://opensource.org/licenses/mit-license.php) license.
