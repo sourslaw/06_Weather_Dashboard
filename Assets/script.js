@@ -26,6 +26,7 @@ function getApi(requestUrl, requestUrlDos, requestUrlTres) {
 				return response.json();
 			}));
 		}).then(function (data) {
+			console.log(data)
 
 			const lat = `${data[2].data[0].latitude}`
 			const long = `${data[2].data[0].longitude}`
@@ -68,7 +69,7 @@ function handleForm(event) {
 	localStorage.setItem('main', JSON.stringify(`${searchInput.value}`));
 
 	clear();
-	
+
 	searchInput.value = "";
 };
 
@@ -90,13 +91,16 @@ function handleOtherForm(event) {
 // removes child nodes upon new search
 function clear() {
 	const byeMain = document.getElementById('mainForecast');
+
 	while (byeMain.firstChild) {
 		byeMain.removeChild(byeMain.firstChild);
-		};
+	};
+
 	const byeForecast = document.getElementById('secondaryForecast');
+
 	while (byeForecast.firstChild) {
 		byeForecast.removeChild(byeForecast.firstChild);
-		};
+	};
 };
 
 // search field
@@ -170,7 +174,7 @@ function mainCard(data) {
 	
 	const cardContainer = document.createElement('div');
 	cardContainer.className = 'card';
-	cardContainer.setAttribute('style', 'width: 25rem;');
+	cardContainer.setAttribute('style', 'width: 35%;');
 	
 	const cardBody = document.createElement('div');
 	cardBody.className = 'card-body';
