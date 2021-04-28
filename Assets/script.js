@@ -39,7 +39,6 @@ function getApi(requestUrl, requestUrlDos, requestUrlTres) {
 			return response.json();
 
 		}).then(function(newData) {
-			console.log(newData)
 			console.log(`uvi index: ${newData.current.uvi}`)
 
 			addMain(newData);
@@ -65,7 +64,12 @@ function handleForm(event) {
 
 	selection.append(pastSearch);
 
-	clear()
+	// save last search to localStorage
+	localStorage.setItem('main', JSON.stringify(`${searchInput.value}`));
+
+	clear();
+	
+	searchInput.value = "";
 };
 
 // dropdown form handler (maybe refactor and combine with main form via shared input.value)
@@ -80,7 +84,7 @@ function handleOtherForm(event) {
 	
 	getApi(requestUrl, requestUrlDos, requestUrlTres);
 
-	clear()
+	clear();
 };
 
 // removes child nodes upon new search
@@ -228,3 +232,11 @@ const icons = {
 	'13n': 'Assets/Images/13d.svg',
 	'50n': 'Assets/Images/50d.svg'
 };
+
+// when page reloads, getItem from localStorage, handleform 
+function onReload() {
+	searchInput.value = JSON.parse(localStorage.getItem('main'))
+	window.addEventListener('load', handleForm)
+};
+
+onReload();
