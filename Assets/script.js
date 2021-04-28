@@ -133,7 +133,7 @@ function forecastCards(data) {
 	for (i = 0; i < (data[0].list).length; i +=8) {
 
 		const cardContainer = document.createElement('div');
-		cardContainer.className = 'card';
+		cardContainer.className = 'card text-center';
 		cardContainer.setAttribute('style', 'width: 20%;');
 		
 		const cardBody = document.createElement('div');
