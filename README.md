@@ -25,7 +25,10 @@
 - Deployed application may be seen: [here](https://sourslaw.github.io/06_Weather_Dashboard/)
 
 ### Usage
-. . .
+- Entering the name of a US city, the user is presented with the temperature, humidity, windspeed, and uv index for the day
+- A five day forecast presents the temperature and humidity for the following five days
+- Previous searches can be selected from the drop-down menu
+- Upon reload/closing of the window, the application will store the last search in local storage and reload the page with the weather information
 
 ### Credits
 - [Bootstrap](https://getbootstrap.com/)

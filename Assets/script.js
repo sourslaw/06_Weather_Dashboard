@@ -40,7 +40,7 @@ function getApi(requestUrl, requestUrlDos, requestUrlTres) {
 			return response.json();
 
 		}).then(function(newData) {
-			console.log(`uvi index: ${newData.current.uvi}`)
+			console.log(`uv index: ${newData.current.uvi}`)
 
 			addMain(newData);
 
@@ -112,7 +112,7 @@ const pFour = document.createElement('p');
 
 function addMain(newData){
 
-	pFour.innerText = `uvi index: ${newData.current.uvi}`;
+	pFour.innerText = `uv index: ${newData.current.uvi}`;
 	if ( parseInt(`${newData.current.uvi}`) <= 2 ) {
 		pFour.setAttribute('id', 'uv12')
 	} else if ( parseInt(`${newData.current.uvi}`) >= 3  &&  parseInt(`${newData.current.uvi}`) <= 5 ) {
