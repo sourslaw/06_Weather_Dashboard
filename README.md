@@ -1,5 +1,5 @@
 # Weather Dashboard
-![alt text](assets/images/screenshot.png)
+![alt text](Assets/Images/screenshot.png)
 
 ## Description
 - A weather dashboard . . .

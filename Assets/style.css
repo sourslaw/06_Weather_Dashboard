@@ -2,6 +2,10 @@
 	margin-top: 2.5rem;
 }
 
+.card {
+	margin: .25rem;
+}
+
 h6 {
 	margin-bottom: .5rem;
 }
@@ -19,13 +23,11 @@ p {
 	height: 2rem;
 }
 
-/* #mainForecast {
-	height: 5rems;
-} */
+
 
 #forecastSection {
 	margin-top: 1.5rem;
-	margin-bottom: .5rem;
+	margin-bottom: .25rem;
 }
 
 /* for uv highlighting */
