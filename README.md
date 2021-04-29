@@ -2,7 +2,7 @@
 ![alt text](Assets/Images/screenshot.png)
 
 ## Description
-- A weather dashboard . . .
+- A minimalist weather dashboard giving you just what you need
 
 ### The User Story for this project is as follows:
 - AS A traveler, I WANT to see the weather outlook for multiple cities, SO THAT I can plan a trip accordingly
