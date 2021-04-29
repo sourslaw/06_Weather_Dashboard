@@ -26,10 +26,13 @@ function getApi(requestUrl, requestUrlDos, requestUrlTres) {
 				return response.json();
 			}));
 		}).then(function (data) {
-			console.log(data)
 
-			const lat = `${data[2].data[0].latitude}`
-			const long = `${data[2].data[0].longitude}`
+			// const lat = `${data[2].data[0].latitude}`
+			// const long = `${data[2].data[0].longitude}`
+
+			// opencage. tempt since positionstatck is down (2021-04-29), 1/2
+			const lat = `${data[2].results[0].geometry.lat}`;
+			const long = `${data[2].results[0].geometry.lng}`;
 
 			mainCard(data);
 			forecastCards(data);
@@ -43,7 +46,6 @@ function getApi(requestUrl, requestUrlDos, requestUrlTres) {
 			console.log(`uv index: ${newData.current.uvi}`)
 
 			addMain(newData);
-
 		});
 };
 
@@ -54,7 +56,10 @@ function handleForm(event) {
 
 	const requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput.value}&units=imperial&appid=${apiKey}`;
 	const requestUrlDos = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}&units=imperial&appid=${apiKey}`;
-	const requestUrlTres = `http://api.positionstack.com/v1/forward?access_key=${psApiKey}&country=us&query=${searchInput.value}`;
+	// const requestUrlTres = `http://api.positionstack.com/v1/forward?access_key=${psApiKey}&country=us&query=${searchInput.value}`;
+
+	// opencage. tempt since positionstatck is down (2021-04-29), 2/2
+	const requestUrlTres = `https://api.opencagedata.com/geocode/v1/json?q=${searchInput.value}&key=eef111c608734d9790eb662afb2657c8`;
 	
 	getApi(requestUrl, requestUrlDos, requestUrlTres);
 
@@ -179,9 +184,9 @@ function mainCard(data) {
 	const cardBody = document.createElement('div');
 	cardBody.className = 'card-body';
 	const hFourer = document.createElement('h4');
-	hFourer.innerText = `${data[0].city.name}`;
+	hFourer.innerText = `${data[0].city.name}`.toLowerCase();
 	const hFiver = document.createElement('h5');
-	hFiver.innerText = (todayIs());
+	hFiver.innerText = ('today, ' + todayIs());
 
 	// weather icons (https://openweathermap.org/weather-conditions)
 	const hSix = document.createElement('img');
