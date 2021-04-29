@@ -179,7 +179,8 @@ function mainCard(data) {
 	
 	const cardContainer = document.createElement('div');
 	cardContainer.className = 'card';
-	cardContainer.setAttribute('style', 'width: 35%;');
+	// cardContainer.setAttribute('style', 'width: 35%;');
+	cardContainer.setAttribute('id', 'mainForeCard');
 	
 	const cardBody = document.createElement('div');
 	cardBody.className = 'card-body';

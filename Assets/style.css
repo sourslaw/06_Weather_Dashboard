@@ -23,11 +23,22 @@ p {
 	height: 2rem;
 }
 
+#previousSearches {
+	margin-bottom: 1rem;
+}
 
+#searchSelection {
+	width: 100%;
+	color: gray;
+}
 
 #forecastSection {
 	margin-top: 1.5rem;
 	margin-bottom: .25rem;
+}
+
+footer {
+	height: 3rem;
 }
 
 /* for uv highlighting */
@@ -55,3 +66,16 @@ p {
 	background-color: #6d597a;	
 	color: white;
 }
+
+@media screen and (min-width: 769px) {
+	#mainForeCard {
+	width: 35%;
+	}
+  }
+
+@media screen and (max-width: 768px) {
+	#mainForeCard {
+	width: 100%;
+	}
+  }
+  
