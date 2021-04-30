@@ -15,22 +15,53 @@ const secondF = document.getElementById('secondaryForecast');
 
 
 // promise all (https://gomakethings.com/waiting-for-multiple-all-api-responses-to-complete-with-the-vanilla-js-promise.all-method/)
+// function getApi(requestUrl, requestUrlDos, requestUrlTres) {
+// 	Promise.all([
+// 		fetch(requestUrl),
+// 		fetch(requestUrlDos),
+// 		fetch(requestUrlTres)
+// 	]).then(function (responses) {
+// 			// console.log(responses);
+// 			return Promise.all(responses.map(function (response) {
+// 				return response.json();
+// 			}));
+// 		}).then(function (data) {
+
+// 			// const lat = `${data[2].data[0].latitude}`
+// 			// const long = `${data[2].data[0].longitude}`
+
+// 			// opencage. tempt since positionstatck is down (2021-04-29), 1/3
+// 			const lat = `${data[2].results[0].geometry.lat}`;
+// 			const long = `${data[2].results[0].geometry.lng}`;
+
+// 			mainCard(data);
+// 			forecastCards(data);
+
+// 			return fetch (`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely,hourly,daily,alerts&appid=${apiKey}`);
+		
+// 		}).then(function(response) {
+// 			return response.json();
+
+// 		}).then(function(newData) {
+// 			console.log(`uv index: ${newData.current.uvi}`)
+
+// 			addMain(newData);
+// 		});
+// };
+
+
+// wtih error handling
 function getApi(requestUrl, requestUrlDos, requestUrlTres) {
 	Promise.all([
 		fetch(requestUrl),
 		fetch(requestUrlDos),
 		fetch(requestUrlTres)
 	]).then(function (responses) {
-			// console.log(responses);
 			return Promise.all(responses.map(function (response) {
 				return response.json();
 			}));
 		}).then(function (data) {
-
-			// const lat = `${data[2].data[0].latitude}`
-			// const long = `${data[2].data[0].longitude}`
-
-			// opencage. tempt since positionstatck is down (2021-04-29), 1/2
+			console.log(data)
 			const lat = `${data[2].results[0].geometry.lat}`;
 			const long = `${data[2].results[0].geometry.lng}`;
 
@@ -46,8 +77,22 @@ function getApi(requestUrl, requestUrlDos, requestUrlTres) {
 			console.log(`uv index: ${newData.current.uvi}`)
 
 			addMain(newData);
+		}).catch(function (error) {
+
+			console.log(`oh oh, ${error}`);
+
+			displayTryAgain();
 		});
 };
+
+// displays message for error handling 
+function displayTryAgain() {
+	const pOne = document.createElement('p');
+	pOne.innerText = 'oh oh, please check your city and try again . . .'
+
+	mainForecast.append(pOne)
+};
+
 
 // form
 function handleForm(event) {
@@ -58,7 +103,7 @@ function handleForm(event) {
 	const requestUrlDos = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}&units=imperial&appid=${apiKey}`;
 	// const requestUrlTres = `http://api.positionstack.com/v1/forward?access_key=${psApiKey}&country=us&query=${searchInput.value}`;
 
-	// opencage. tempt since positionstatck is down (2021-04-29), 2/2
+	// opencage. tempt since positionstatck is down (2021-04-29), 2/3
 	const requestUrlTres = `https://api.opencagedata.com/geocode/v1/json?q=${searchInput.value}&key=eef111c608734d9790eb662afb2657c8`;
 	
 	getApi(requestUrl, requestUrlDos, requestUrlTres);
@@ -78,6 +123,7 @@ function handleForm(event) {
 	searchInput.value = "";
 };
 
+
 // dropdown form handler (maybe refactor and combine with main form via shared input.value)
 function handleOtherForm(event) {
 	event.preventDefault();
@@ -86,7 +132,10 @@ function handleOtherForm(event) {
 
 	const requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${selection.value}&units=imperial&appid=${apiKey}`;
 	const requestUrlDos = `https://api.openweathermap.org/data/2.5/weather?q=${selection.value}&units=imperial&appid=${apiKey}`
-	const requestUrlTres = `http://api.positionstack.com/v1/forward?access_key=${psApiKey}&country=us&query=${selection.value}`;
+	// const requestUrlTres = `http://api.positionstack.com/v1/forward?access_key=${psApiKey}&country=us&query=${selection.value}`;
+
+	// opencage. tempt since positionstatck is down (2021-04-29), 3/3
+	const requestUrlTres = `https://api.opencagedata.com/geocode/v1/json?q=${selection.value}&key=eef111c608734d9790eb662afb2657c8`;
 	
 	getApi(requestUrl, requestUrlDos, requestUrlTres);
 
