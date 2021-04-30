@@ -1,6 +1,5 @@
 # Weather Dashboard
 ![alt text](Assets/Images/screenshot.png)
-![alt text](Assets/Images/screenrecord.gif)
 
 ## Description
 - A minimalist weather dashboard giving you just what you need
@@ -20,6 +19,8 @@
 - Deployed application may be seen: [here](https://sourslaw.github.io/06_Weather_Dashboard/)
 
 ### Usage
+![alt text](Assets/Images/screenrecord.gif)
+
 - Entering the name of a US city, the user is presented with the temperature, humidity, windspeed, and uv index for the day
 	- UV index information is highlighted by color based on risk of harm
 - A five day forecast presents the temperature and humidity for the following five days
