@@ -247,7 +247,7 @@ const icons = {
 // displays message for error handling 
 function displayTryAgain() {
 	const pOne = document.createElement('p');
-	pOne.innerText = 'oh oh, please check your city and try again . . .'
+	pOne.innerText = 'please enter a city or try again . . .'
 
 	mainForecast.append(pOne)
 };

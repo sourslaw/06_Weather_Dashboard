@@ -1,5 +1,6 @@
 # Weather Dashboard
 ![alt text](Assets/Images/screenshot.png)
+![alt text](Assets/Images/screenrecord.gif)
 
 ## Description
 - A minimalist weather dashboard giving you just what you need
