@@ -1,7 +1,6 @@
 // keys
 const apiKey = config.API_KEY;
 const psApiKey =  config.PS_API_KEY;
-const ouvAccessToken =  config.O_UV_ACCESS_TOKEN;
 
 // form 
 const searchForm = document.getElementById('searchField');
@@ -13,44 +12,7 @@ const mainF = document.getElementById('mainForecast');
 // five day forecast LIs
 const secondF = document.getElementById('secondaryForecast');
 
-
-// promise all (https://gomakethings.com/waiting-for-multiple-all-api-responses-to-complete-with-the-vanilla-js-promise.all-method/)
-// function getApi(requestUrl, requestUrlDos, requestUrlTres) {
-// 	Promise.all([
-// 		fetch(requestUrl),
-// 		fetch(requestUrlDos),
-// 		fetch(requestUrlTres)
-// 	]).then(function (responses) {
-// 			// console.log(responses);
-// 			return Promise.all(responses.map(function (response) {
-// 				return response.json();
-// 			}));
-// 		}).then(function (data) {
-
-// 			// const lat = `${data[2].data[0].latitude}`
-// 			// const long = `${data[2].data[0].longitude}`
-
-// 			// opencage. tempt since positionstatck is down (2021-04-29), 1/3
-// 			const lat = `${data[2].results[0].geometry.lat}`;
-// 			const long = `${data[2].results[0].geometry.lng}`;
-
-// 			mainCard(data);
-// 			forecastCards(data);
-
-// 			return fetch (`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely,hourly,daily,alerts&appid=${apiKey}`);
-		
-// 		}).then(function(response) {
-// 			return response.json();
-
-// 		}).then(function(newData) {
-// 			console.log(`uv index: ${newData.current.uvi}`)
-
-// 			addMain(newData);
-// 		});
-// };
-
-
-// wtih error handling
+// get Apis, making four calls
 function getApi(requestUrl, requestUrlDos, requestUrlTres) {
 	Promise.all([
 		fetch(requestUrl),
@@ -61,7 +23,7 @@ function getApi(requestUrl, requestUrlDos, requestUrlTres) {
 				return response.json();
 			}));
 		}).then(function (data) {
-			console.log(data)
+			// console.log(data)
 			const lat = `${data[2].results[0].geometry.lat}`;
 			const long = `${data[2].results[0].geometry.lng}`;
 
@@ -84,15 +46,6 @@ function getApi(requestUrl, requestUrlDos, requestUrlTres) {
 			displayTryAgain();
 		});
 };
-
-// displays message for error handling 
-function displayTryAgain() {
-	const pOne = document.createElement('p');
-	pOne.innerText = 'oh oh, please check your city and try again . . .'
-
-	mainForecast.append(pOne)
-};
-
 
 // form
 function handleForm(event) {
@@ -122,7 +75,6 @@ function handleForm(event) {
 
 	searchInput.value = "";
 };
-
 
 // dropdown form handler (maybe refactor and combine with main form via shared input.value)
 function handleOtherForm(event) {
@@ -290,6 +242,14 @@ const icons = {
 	'11n': 'Assets/Images/11d.svg',
 	'13n': 'Assets/Images/13d.svg',
 	'50n': 'Assets/Images/50d.svg'
+};
+
+// displays message for error handling 
+function displayTryAgain() {
+	const pOne = document.createElement('p');
+	pOne.innerText = 'oh oh, please check your city and try again . . .'
+
+	mainForecast.append(pOne)
 };
 
 // when page reloads, getItem from localStorage, handleform 
