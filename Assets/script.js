@@ -1,6 +1,6 @@
 // keys
 const apiKey = 'db044841b99b5dea3d2c6a13780e9746'; //config.API_KEY
-const psApiKey =  'd4d12e0db92bd7554789a217e8cda89b'; //config.PS_API_KEY
+// const psApiKey =  'd4d12e0db92bd7554789a217e8cda89b'; //config.PS_API_KEY
 
 // form 
 const searchForm = document.getElementById('searchField');
