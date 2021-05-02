@@ -77,5 +77,13 @@ footer {
 	#mainForeCard {
 	width: 100%;
 	}
+	h5 {
+		font-size: 5px;
+	}
+	#sfBits {
+		padding: .1rem;
+		margin: .1rem;
+		font-size: 5px;
+	}
   }
   

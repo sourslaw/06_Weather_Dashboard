@@ -1,6 +1,5 @@
 // keys
-const apiKey = 'db044841b99b5dea3d2c6a13780e9746'; //config.API_KEY
-// const psApiKey =  'd4d12e0db92bd7554789a217e8cda89b'; //config.PS_API_KEY
+
 
 // form 
 const searchForm = document.getElementById('searchField');
@@ -30,7 +29,7 @@ function getApi(requestUrl, requestUrlDos, requestUrlTres) {
 			mainCard(data);
 			forecastCards(data);
 
-			return fetch (`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely,hourly,daily,alerts&appid=${apiKey}`);
+			return fetch (`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely,hourly,daily,alerts&appid=db044841b99b5dea3d2c6a13780e9746`);
 		
 		}).then(function(response) {
 			return response.json();
@@ -52,9 +51,8 @@ function handleForm(event) {
 	event.preventDefault();
 	console.log(`form submitted, search value: ${searchInput.value}`);
 
-	const requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput.value}&units=imperial&appid=${apiKey}`;
-	const requestUrlDos = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}&units=imperial&appid=${apiKey}`;
-	// const requestUrlTres = `http://api.positionstack.com/v1/forward?access_key=${psApiKey}&country=us&query=${searchInput.value}`;
+	const requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput.value}&units=imperial&appid=db044841b99b5dea3d2c6a13780e9746`;
+	const requestUrlDos = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}&units=imperial&appid=db044841b99b5dea3d2c6a13780e9746`;
 
 	// opencage. tempt since positionstatck is down (2021-04-29), 2/3
 	const requestUrlTres = `https://api.opencagedata.com/geocode/v1/json?q=${searchInput.value}&key=eef111c608734d9790eb662afb2657c8`;
@@ -82,9 +80,8 @@ function handleOtherForm(event) {
 
 	console.log(`OTHER form submitted, search value: ${searchInput.value}`);
 
-	const requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${selection.value}&units=imperial&appid=${apiKey}`;
-	const requestUrlDos = `https://api.openweathermap.org/data/2.5/weather?q=${selection.value}&units=imperial&appid=${apiKey}`
-	// const requestUrlTres = `http://api.positionstack.com/v1/forward?access_key=${psApiKey}&country=us&query=${selection.value}`;
+	const requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${selection.value}&units=imperial&appid=db044841b99b5dea3d2c6a13780e9746`;
+	const requestUrlDos = `https://api.openweathermap.org/data/2.5/weather?q=${selection.value}&units=imperial&appid=db044841b99b5dea3d2c6a13780e9746`
 
 	// opencage. tempt since positionstatck is down (2021-04-29), 3/3
 	const requestUrlTres = `https://api.opencagedata.com/geocode/v1/json?q=${selection.value}&key=eef111c608734d9790eb662afb2657c8`;
@@ -141,6 +138,7 @@ function forecastCards(data) {
 		const cardContainer = document.createElement('div');
 		cardContainer.className = 'card text-center';
 		cardContainer.setAttribute('style', 'width: 18.5%;');
+		cardContainer.setAttribute('id', 'sfBits');
 		
 		const cardBody = document.createElement('div');
 		cardBody.className = 'card-body';
