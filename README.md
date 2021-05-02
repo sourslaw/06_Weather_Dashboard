@@ -30,7 +30,7 @@
 ### Credits
 - [Bootstrap](https://getbootstrap.com/)
 - [OpenWeather API](https://openweathermap.org/api)
-- [positionstack API](https://positionstack.com/documentation)
+- [OpenCage Geocoding API](https://opencagedata.com/api)
 
 ### License
 - Licensed under the [MIT](https://opensource.org/licenses/mit-license.php) license.
