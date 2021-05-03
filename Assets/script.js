@@ -143,6 +143,7 @@ function forecastCards(data) {
 		const cardBody = document.createElement('div');
 		cardBody.className = 'card-body';
 		const hFiver = document.createElement('h5');
+		hFiver.setAttribute('id', 'sfH5')
 
 		const locDate = (`${data[0].list[i].dt_txt}`);
 		hFiver.innerText = locDate.slice(0,10);
