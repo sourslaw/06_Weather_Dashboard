@@ -16,7 +16,7 @@
 
 ### Installation
 - The project is uploaded to [GitHub](https://github.com/) at the following repository: [here](https://github.com/sourslaw/06_Weather_Dashboard)
-- Deployed application may be seen: [here](https://sourslaw.github.io/06_Weather_Dashboard/)
+- Deployed application may be seen: [here](https://sourslaw.github.io/Weather_Dashboard/)
 
 ### Usage
 ![alt text](Assets/Images/screenrecord.gif)
