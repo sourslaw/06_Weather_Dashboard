@@ -23,8 +23,13 @@ function getApi(requestUrl, requestUrlDos, requestUrlTres) {
 			}));
 		}).then(function (data) {
 			// console.log(data)
-			const lat = `${data[2].results[0].geometry.lat}`;
-			const long = `${data[2].results[0].geometry.lng}`;
+			
+			// old, but will just leave it here . . . 
+			// const lat = `${data[2].results[0].geometry.lat}`;
+			// const long = `${data[2].results[0].geometry.lng}`;
+
+			const lat = `${data[1].coord.lat}`;
+			const long = `${data[1].coord.lon}`;
 
 			mainCard(data);
 			forecastCards(data);
