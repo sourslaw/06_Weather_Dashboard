@@ -22,7 +22,7 @@ function getApi(requestUrl, requestUrlDos, requestUrlTres) {
 				return response.json();
 			}));
 		}).then(function (data) {
-			console.log(data)
+			// console.log(data)
 			
 			// old, but will just leave it here . . . 
 			// const lat = `${data[2].results[0].geometry.lat}`;
@@ -90,7 +90,8 @@ function handleOtherForm(event) {
 	const requestUrlDos = `https://api.openweathermap.org/data/2.5/weather?q=${selection.value}&units=imperial&appid=db044841b99b5dea3d2c6a13780e9746`
 
 	// opencage. tempt since positionstatck is down (2021-04-29), 3/3
-	const requestUrlTres = `https://api.opencagedata.com/geocode/v1/json?q=${selection.value}&key=eef111c608734d9790eb662afb2657c8`;
+  // updated key (2024-01-02)
+	const requestUrlTres = `https://api.opencagedata.com/geocode/v1/json?q=${selection.value}&key=572098076428450ab3ff836e46b6067a`;
 	
 	getApi(requestUrl, requestUrlDos, requestUrlTres);
 
